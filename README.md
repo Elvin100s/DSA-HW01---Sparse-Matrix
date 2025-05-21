@@ -8,7 +8,6 @@ This project implements a sparse matrix calculator that can perform addition, su
   - Subtraction
   - Multiplication
 - Save results with operation-specific filenames
-- Maintain a history of all operations
 ## File Format
 Input matrices should be in the following format:
 
@@ -26,10 +25,7 @@ cols=3
 4. Choose the input matrices
 5. View the results
 ## Results Storage
-The program stores results in two ways:
-
-1. Individual Result Files : Each operation creates a timestamped file (e.g., add_20230401_123045.json )
-2. History File : All operations are also appended to operation_history.json for reference
+The program stores results in result.txt
 ## Implementation Details
 - Uses a custom sparse matrix implementation for memory efficiency
 - Handles large matrices with minimal memory usage
