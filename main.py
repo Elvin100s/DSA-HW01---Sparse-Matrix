@@ -13,7 +13,7 @@ from operations import add, subtract, multiply
 
 # Configuration
 SAMPLE_FOLDER = "sample_inputs"
-OUTPUT_FILE = "result.json"  # Change to "result.txt" for text format
+OUTPUT_FILE = "result.txt"  # Change to "result.txt" for text format
 OPERATIONS = {
     '1': ('Add', add),
     '2': ('Subtract', subtract),
