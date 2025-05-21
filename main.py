@@ -51,47 +51,16 @@ def select_file(folder: str) -> Optional[str]:
         return None
 
 def save_result_with_summary(result, operation, matrix1_path, matrix2_path, m1, m2, sample_folder):
-    """Save result with summary information"""
-    # Generate timestamp
-    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    
-    # Create the result.json file with summary information
+    """Save result in matrix form with brackets on both ends of each row"""
     summary_path = os.path.join(sample_folder, OUTPUT_FILE)
-    
-    # Create summary data
-    summary = {
-        "operation_info": {
-            "timestamp": timestamp,
-            "operation_type": operation,
-            "input_files": {
-                "matrix1": os.path.basename(matrix1_path),
-                "matrix2": os.path.basename(matrix2_path)
-            }
-        },
-        "input_matrices": {
-            "matrix1": {
-                "dimensions": f"{m1.rows}x{m1.cols}",
-                "non_zero_elements": len(list(m1.items()))
-            },
-            "matrix2": {
-                "dimensions": f"{m2.rows}x{m2.cols}",
-                "non_zero_elements": len(list(m2.items()))
-            }
-        },
-        "result": {
-            "dimensions": f"{result.rows}x{result.cols}",
-            "non_zero_elements": len(list(result.items())),
-            "sample_entries": [
-                {"row": row, "col": col, "value": val}
-                for (row, col), val in list(result.items())[:5]  # Include up to 5 sample entries
-            ]
-        }
-    }
-    
-    # Write the summary to result.json
+
     with open(summary_path, 'w') as f:
-        json.dump(summary, f, indent=2)
-    
+        # Write header with brackets
+        f.write(f"[{result.rows} {result.cols}]\n")
+        # Write each non-zero entry with brackets
+        for (row, col), val in sorted(result.items()):
+            f.write(f"[{row} {col} {val}]\n")
+
     return summary_path
 
 def main():
